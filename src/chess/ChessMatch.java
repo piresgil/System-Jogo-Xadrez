@@ -79,7 +79,7 @@ public class ChessMatch {
         return check;
     }
 
-    public boolean getcheckMate() {
+    public boolean getCheckMate() {
         return checkMate;
     }
 

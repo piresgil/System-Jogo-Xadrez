@@ -1,4 +1,6 @@
-
+/**
+ * @author Daniel Gil
+ */
 package chess.pieces;
 
 import boardgame.Board;
@@ -8,205 +10,141 @@ import chess.ChessPiece;
 import chess.Color;
 
 /**
- * Class Pawn
- * 
- * Herda de ChessPiece
- *
+ * Representa a pe√ßa do Pe√£o no jogo de xadrez.
+ * <p>
+ * O Pe√£o tem movimentos especiais para o primeiro movimento (duas casas para
+ * frente), movimentos diagonais para capturar pe√ßas e o movimento especial
+ * "en passant".
  */
 public class Pawn extends ChessPiece {
 
-	/**
-	 * Dependencia
-	 */
-	private ChessMatch chessMatch;
+    /**
+     * Depend√™ncia da partida de xadrez para verificar condi√ß√µes especiais
+     * como o movimento "en passant".
+     */
+    private ChessMatch chessMatch;
 
-	/**
-	 * 
-	 * Construtor
-	 * 
-	 * Busca construtor da Super Class
-	 */
-	public Pawn(Board board, Color color, ChessMatch chessMatch) {
-		super(board, color);
-		this.chessMatch = chessMatch;
-	}
+    /// Construtor da classe `Pawn`.
+    ///
+    /// @param board      A inst√¢ncia do tabuleiro em que o Pe√£o est√°.
+    /// @param color      A cor do Pe√£o ([branco][#WHITE] ou
+    ///                   [preto][#BLACK]).
+    /// @param chessMatch A inst√¢ncia da partida de xadrez atual.
+    public Pawn(Board board, Color color, ChessMatch chessMatch) {
+        super(board, color);
+        this.chessMatch = chessMatch;
+    }
 
-	/**
-	 * Metodo To String
-	 * 
-	 * Busca super class (Override)
-	 */
-	@Override
-	public String toString() {
-		return "P";
-	}
+    /**
+     * Retorna uma representa√ß√£o em String do Pe√£o para fins de exibi√ß√£o
+     * no tabuleiro.
+     * <p>
+     * Este m√©todo sobrescreve o m√©todo {@link Object#toString()} da superclasse.
+     *
+     * @return Uma string "P" representando o Pe√£o.
+     */
+    @Override
+    public String toString() {
+        return "P";
+    }
 
-	/**
-	 * Metodo Possible Moves
-	 * 
-	 * Busca super class (Override)
-	 * 
-	 * Cria matriz de boolean(false) com o tamanho do tabuleiro Cria nova variavel
-	 * do tipo Position nos valores zero-zero para fazer testes
-	 */
-	@Override
-	public boolean[][] possibleMoves() {
-		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+    /**
+     * Retorna uma matriz booleana indicando os movimentos poss√≠veis do Pe√£o
+     * na sua posi√ß√£o atual.
+     * <p>
+     * Os movimentos poss√≠veis do Pe√£o dependem de sua cor e do estado do jogo.
+     * Pe√µes brancos movem-se para frente (diminuindo a linha), e pe√µes pretos
+     * movem-se para baixo (aumentando a linha). No primeiro movimento, um pe√£o
+     * pode mover-se duas casas para frente. Pe√µes capturam pe√ßas advers√°rias
+     * movendo-se uma casa na diagonal. O m√©todo tamb√©m considera o movimento
+     * especial "en passant".
+     *
+     * @return Uma matriz booleana com as mesmas dimens√µes do tabuleiro, onde
+     * `true` indica que a casa correspondente √© um movimento poss√≠vel para o
+     * Pe√£o, e `false` caso contr√°rio.
+     */
+    @Override
+    public boolean[][] possibleMoves() {
+        boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+        Position p = new Position(0, 0);
 
-		Position p = new Position(0, 0);
+        if (getColor() == Color.White) {
+            // Above 1x
+            p.setValues(position.getRow() - 1, position.getColumn());
+            if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Above x2 (first move)
+            p.setValues(position.getRow() - 2, position.getColumn());
+            Position p2 = new Position(position.getRow() - 1, position.getColumn());
+            if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2)
+                    && !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Diagonal left (capture)
+            p.setValues(position.getRow() - 1, position.getColumn() - 1);
+            if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Diagonal right (capture)
+            p.setValues(position.getRow() - 1, position.getColumn() + 1);
+            if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
 
-		/**
-		 * Above 1x
-		 * 
-		 * Testa cor Seta valores para a posis„o p(row -1) porque a peÁa vai andar para
-		 * cima(Above) SE existir posis„o no tabuleiro E n√£o existir peÁa na posis„o
-		 * 
-		 * Retorna valor na matriz como True
-		 */
-		if (getColor() == Color.White) {
-			p.setValues(position.getRow() - 1, position.getColumn());
-			if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Above x2
-			 * 
-			 * Seta valores para a posis„o p(row -2) porque a peÁa vai andar 2 casas para
-			 * cima(Above)
-			 * 
-			 * cria nova pocis√£o para receber Position
-			 * 
-			 * testa SE existir posis„o no tabuleiro E n√£o existir peÁa na posis„o tanto na
-			 * peÁa p como na p2
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() - 2, position.getColumn());
-			Position p2 = new Position(position.getRow() - 1, position.getColumn());
-			if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2)
-					&& !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Diagonal left
-			 * 
-			 * Seta valores para a posis„o p(row -1)(column -1) porque a peÁa vai andar na
-			 * Diagonal esquerda SE existir posis„o no tabuleiro E existir peÁa oponente na
-			 * posis„o
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() - 1, position.getColumn() - 1);
-			if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Diagonal Rigth
-			 * 
-			 * Seta valores para a posis„o p(row -1)(column +1) porque a peÁa vai andar na
-			 * Diagonal direita SE existir posis„o no tabuleiro E existir peÁa oponente na
-			 * posis„o
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() - 1, position.getColumn() + 1);
-			if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
+            // Special move en passant (left)
+            if (position.getRow() == 3) {
+                Position left = new Position(position.getRow(), position.getColumn() - 1);
+                if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+                        && getBoard().piece(left) == chessMatch.getenPassantVulnerable()) {
+                    mat[left.getRow() - 1][left.getColumn()] = true;
+                }
+                // Special move en passant (right)
+                Position right = new Position(position.getRow(), position.getColumn() + 1);
+                if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+                        && getBoard().piece(right) == chessMatch.getenPassantVulnerable()) {
+                    mat[right.getRow() - 1][right.getColumn()] = true;
+                }
+            }
 
-			// especial move en passant
-			// h√° esquerda
-			if (position.getRow() == 3) {
-				Position left = new Position(position.getRow(), position.getColumn() - 1);
-				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
-						&& getBoard().piece(left) == chessMatch.getenPassantVulnerable()) {
-					mat[left.getRow() - 1][left.getColumn()] = true;
-				}
-				// especial move en passant
-				// h√° direita
-				Position rigth = new Position(position.getRow(), position.getColumn() + 1);
-				if (getBoard().positionExists(rigth) && isThereOpponentPiece(rigth)
-						&& getBoard().piece(rigth) == chessMatch.getenPassantVulnerable()) {
-					mat[rigth.getRow() - 1][rigth.getColumn()] = true;
-				}
-			}
-
-		} else {
-			/**
-			 * Above 1x
-			 * 
-			 * Testa cor Seta valores para a posis„o p(row +1) (porque a peÁa e preta e anda
-			 * para baixo k √© +1) vai andar para cima(Above) SE existir posis„o no tabuleiro
-			 * E n√£o existir peÁa na posis„o
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() + 1, position.getColumn());
-			if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Above x2
-			 * 
-			 * Seta valores para a posis„o p(row +2) porque a peÁa vai andar 2 casas para
-			 * cima(Above)(porque a peÁa e preta e anda para baixo k √© +1)
-			 * 
-			 * cria nova pocis√£o para receber Position
-			 * 
-			 * testa SE existir posis„o no tabuleiro E n√£o existir peÁa na posis„o tanto na
-			 * peÁa p como na p2
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() + 2, position.getColumn());
-			Position p2 = new Position(position.getRow() + 1, position.getColumn());
-			if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2)
-					&& !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Diagonal left
-			 * 
-			 * Seta valores para a posis„o p(row +1)(porque a peÁa e preta e anda para baixo
-			 * k √© +1)(column -1) porque a peÁa vai andar na Diagonal esquerda SE existir
-			 * posis„o no tabuleiro E existir peÁa oponente na posis„o
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() + 1, position.getColumn() - 1);
-			if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			/**
-			 * Diagonal Rigth
-			 * 
-			 * Seta valores para a posis„o p(row +1)(porque a peÁa e preta e anda para baixo
-			 * k √© +1)(column +1) porque a peÁa vai andar na Diagonal direita SE existir
-			 * posis„o no tabuleiro E existir peÁa oponente na posis„o
-			 * 
-			 * Retorna valor na matriz como True
-			 */
-			p.setValues(position.getRow() + 1, position.getColumn() + 1);
-			if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-				mat[p.getRow()][p.getColumn()] = true;
-			}
-			// especial move en passant
-			// h√° esquerda
-			if (position.getRow() == 4) {
-				Position left = new Position(position.getRow(), position.getColumn() - 1);
-				if (getBoard().positionExists(left) && isThereOpponentPiece(left)
-						&& getBoard().piece(left) == chessMatch.getenPassantVulnerable()) {
-					mat[left.getRow() + 1][left.getColumn()] = true;
-				}
-				// especial move en passant
-				// h√° direita
-				Position rigth = new Position(position.getRow(), position.getColumn() + 1);
-				if (getBoard().positionExists(rigth) && isThereOpponentPiece(rigth)
-						&& getBoard().piece(rigth) == chessMatch.getenPassantVulnerable()) {
-					mat[left.getRow() - 1][left.getColumn()] = true;
-				}
-			}
-		}
-		return mat;
-	}
+        } else {
+            // Below 1x
+            p.setValues(position.getRow() + 1, position.getColumn());
+            if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Below x2 (first move)
+            p.setValues(position.getRow() + 2, position.getColumn());
+            Position p2 = new Position(position.getRow() + 1, position.getColumn());
+            if (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p) && getBoard().positionExists(p2)
+                    && !getBoard().thereIsAPiece(p2) && getMoveCount() == 0) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Diagonal left (capture)
+            p.setValues(position.getRow() + 1, position.getColumn() - 1);
+            if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Diagonal right (capture)
+            p.setValues(position.getRow() + 1, position.getColumn() + 1);
+            if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+                mat[p.getRow()][p.getColumn()] = true;
+            }
+            // Special move en passant (left)
+            if (position.getRow() == 4) {
+                Position left = new Position(position.getRow(), position.getColumn() - 1);
+                if (getBoard().positionExists(left) && isThereOpponentPiece(left)
+                        && getBoard().piece(left) == chessMatch.getenPassantVulnerable()) {
+                    mat[left.getRow() + 1][left.getColumn()] = true;
+                }
+                // Special move en passant (right)
+                Position right = new Position(position.getRow(), position.getColumn() + 1);
+                if (getBoard().positionExists(right) && isThereOpponentPiece(right)
+                        && getBoard().piece(right) == chessMatch.getenPassantVulnerable()) {
+                    mat[right.getRow() + 1][right.getColumn()] = true;
+                }
+            }
+        }
+        return mat;
+    }
 }

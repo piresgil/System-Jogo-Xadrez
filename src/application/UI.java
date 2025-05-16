@@ -1,4 +1,6 @@
-
+/**
+ * @author Daniel Gil
+ */
 package application;
 
 import java.util.Arrays;
@@ -97,7 +99,7 @@ public class UI {
      * imprime o vencedor e encerra o sistema.
      *
      * @param chessMatch A instância de {@link ChessMatch} contendo o estado atual do jogo.
-     * @param captured Uma lista de {@link ChessPiece} que foram capturadas durante a partida.
+     * @param captured   Uma lista de {@link ChessPiece} que foram capturadas durante a partida.
      */
     public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
         printBoard(chessMatch.getPieces());
@@ -106,7 +108,7 @@ public class UI {
         System.out.println();
         System.out.println("Turn: " + chessMatch.getTurn());
 
-        if (!chessMatch.getcheckMate()) {
+        if (!chessMatch.getCheckMate()) {
             System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
             if (chessMatch.getCheck()) {
                 System.out.println("CHECK!");

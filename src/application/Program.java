@@ -1,3 +1,6 @@
+/**
+ * @author Daniel Gil
+ */
 package application;
 
 import java.util.ArrayList;
@@ -11,69 +14,63 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 
 /**
- * Class Program
- *
+ * Classe principal para executar o jogo de xadrez no console.
+ * <p>
+ * Esta classe contém o método `main` que inicializa uma partida de xadrez,
+ * interage com o usuário para obter os movimentos e exibe o estado do jogo
+ * no console. Ela também trata exceções específicas do jogo de xadrez e
+ * erros de entrada do usuário.
  */
 public class Program {
-	public static void main(String[] args) {
+    /**
+     * Método principal que inicia e controla a execução do jogo de xadrez.
+     *
+     * @param args Os argumentos da linha de comando (não utilizados neste programa).
+     */
+    public static void main(String[] args) {
 
-		/**
-		 * Inicia Scanner
-		 * 
-		 * Inicia ChessMatch
-		 * 
-		 * Inicia Lista de pe�as capturadas
-		 */
+        Scanner sc = new Scanner(System.in);
+        ChessMatch chessMatch = new ChessMatch();
+        List<ChessPiece> capturedPieces = new ArrayList<>();
 
-		Scanner sc = new Scanner(System.in);
-		ChessMatch chessMatch = new ChessMatch();
-		List<ChessPiece> captured = new ArrayList<>();
+        while (!chessMatch.getCheckMate()) {
+            try {
+                UI.clearScreen();
+                UI.printMatch(chessMatch, capturedPieces);
 
-		/**
-		 * Estrutura Enquanto -> n�o houver checkMate
-		 */
-		while (!chessMatch.getcheckMate()) {
-			try {// para tratamento das except
-				UI.clearScreen();// limpa tela
-				UI.printMatch(chessMatch, captured);// imprime tabuleiro de jogo
+                System.out.println();
+                System.out.print("Source: ");
+                ChessPosition source = UI.readChessPosition(sc);
 
-				System.out.println();
-				System.out.print("Source: ");
-				ChessPosition source = UI.readChessPosition(sc);// verifica a source position
+                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces(), possibleMoves);
 
-				boolean[][] posibleMoves = chessMatch.possibleMoves(source);// verifica movimentos possiveis
-				UI.clearScreen();// limpa tela
-				UI.printBoard(chessMatch.getPieces(), posibleMoves);// imprime tabuleiro de jogo
+                System.out.println();
+                System.out.print("Target: ");
+                ChessPosition target = UI.readChessPosition(sc);
 
-				System.out.println();
+                ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 
-				System.out.print("Target: ");
-				ChessPosition target = UI.readChessPosition(sc);// verifica target position
+                if (capturedPiece != null) {
+                    capturedPieces.add(capturedPiece);
+                }
 
-				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);// verifica se existe pe�a
-				// capturada
-
-				if (capturedPiece != null) {// testa se existe pe�asa capturada
-					captured.add(capturedPiece);// se existir adiciona ha lista
-				}
-
-				if (chessMatch.getPromoted() != null) {
-					System.out.print("Enter piece for promotion ([B]/[N]/[R]/[Q]) :");
-					String type = sc.nextLine();
-					chessMatch.replacePromotedPiece(type);
-
-				}
-			}
-
-			catch (ChessException e) {// klk except do tipo ChessException
-				System.out.println(e.getMessage());// mostra menssagem
-				sc.nextLine();// espera clicar enter
-			} catch (InputMismatchException e) {// klk except do tipo InputMismatchException
-				System.out.println(e.getMessage());// mostra msg
-				sc.nextLine();// espera clicar enter
-			}
-		}
-		UI.clearScreen();
-		UI.printMatch(chessMatch, captured);
-	}
+                if (chessMatch.getPromoted() != null) {
+                    System.out.print("Enter piece for promotion ([B]/[N]/[R]/[Q]) :");
+                    String type = sc.nextLine().toUpperCase();
+                    chessMatch.replacePromotedPiece(type);
+                }
+            } catch (ChessException e) {
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
+        }
+        UI.clearScreen();
+        UI.printMatch(chessMatch, capturedPieces);
+        sc.close();
+    }
 }

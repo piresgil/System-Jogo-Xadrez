@@ -1,4 +1,6 @@
-
+/**
+ * @author Daniel Gil
+ */
 package chess.pieces;
 
 import boardgame.Board;

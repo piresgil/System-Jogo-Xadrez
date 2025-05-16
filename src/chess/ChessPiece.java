@@ -36,7 +36,7 @@ public abstract class ChessPiece extends Piece {
 	 * 
 	 * Increse/decrease move count
 	 * 
-	 * get Chess Position - retorna posisões(pocisões da matriz) e converte para
+	 * get Chess Position - retorna posisï¿½es(pocisï¿½es da matriz) e converte para
 	 * ChessPosition ( a1, h8)
 	 */
 	public Color getColor() {
@@ -62,12 +62,12 @@ public abstract class ChessPiece extends Piece {
 	/**
 	 * Metodo is There Opponent Piece
 	 * 
-	 * Metodo boolean que testa se existe peça do oponente
+	 * Metodo boolean que testa se existe peï¿½a do oponente
 	 * 
 	 * Cria variavel p do tipo ChessPiece
 	 * 
-	 * Retorna True quando a variavel p é diferente de nulo e quando a cor da
-	 * variavel p é diferente da cor da class ChessPiece (cor do oponente)
+	 * Retorna True quando a variavel p ï¿½ diferente de nulo e quando a cor da
+	 * variavel p ï¿½ diferente da cor da class ChessPiece (cor do oponente)
 	 */
 	protected boolean isThereOpponentPiece(Position position) {
 		ChessPiece p = (ChessPiece) getBoard().piece(position);

@@ -1,4 +1,6 @@
-
+/**
+ * @author Daniel Gil
+ */
 package chess.pieces;
 
 import boardgame.Board;
@@ -37,7 +39,7 @@ public class Knight extends ChessPiece {
 	 * 
 	 * Cria nova variavel p do tipo ChessPiece
 	 * 
-	 * retorna True quando p for nulo (casa vazia) OU QUANDO a quando a cor é
+	 * retorna True quando p for nulo (casa vazia) OU QUANDO a quando a cor ï¿½
 	 * diferente da cor da CLASS
 	 */
 	private boolean canMove(Position position) {

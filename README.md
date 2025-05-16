@@ -3,6 +3,6 @@
 
 # Exemplos:
 
-![MainAOO](main/src/Sreenshots/chess-system)
+![MainAOO](main/src/Sreenshots/chess-system.png)
 
-![MainAOO](main/sr/Sreenshots/chess-system 2)
+![MainAOO](main/sr/Sreenshots/chess-system 2.png)

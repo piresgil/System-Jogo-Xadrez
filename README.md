@@ -1,5 +1,6 @@
-## chess-system
+### chess-system
 
+Sistema de jogo de xadrez player vs player, sem UI, modo terminal
 
 # Exemplos:
 

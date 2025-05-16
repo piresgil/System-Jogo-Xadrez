@@ -179,7 +179,7 @@ InputMismatchException
 
 ## Possible moves of a piece 
 
-![MainAOO](src/Sreenshots/Possible moves of a piece.png)
+![MainAOO](src/Sreenshots/PossibleMovesOfPiece.png)
 
 ### Checklist: 
 Methods in Piece: 
@@ -403,7 +403,8 @@ Inheritance
 Polymorphism 
 
 ## Special move - Castling 
-![MainAOO](src/Sreenshots/Special move - Castling.png)
+
+![MainAOO](src/Sreenshots/SpecialMoveCastling.png)
 
 ### Checklist: 
 Update King 
@@ -413,7 +414,8 @@ Update ChessMatch.MakeMove
 Update ChessMatch.UndoMove 
 
 ## Special move - En Passant 
-![MainAOO](src/Sreenshots/Special move - En Passant.png)
+
+![MainAOO](src/Sreenshots/SpecialMoveEnPassant.png)
 
 ### Checklist: 
 Register a pawn which can be captured by en passant on next turn 
@@ -431,7 +433,8 @@ Update ChessMatch.UndoMove
 Update ChessMatch.InitialSetup 
 
 ## Special move - Promotion 
-![MainAOO](src/Sreenshots/Special move - Promotion.png)
+
+![MainAOO](src/Sreenshots/SpecialMovePromotion.png)
 
 ### Checklist: 
 Property ChessMatch.Promoted 

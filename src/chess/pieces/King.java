@@ -8,208 +8,171 @@ import chess.ChessPiece;
 import chess.Color;
 
 /**
- * Class King Rei
- * 
- * Herda de ChessPiece
- *
+ * Representa a pe√ßa Rei no jogo de xadrez.
+ * <p>
+ * O Rei √© uma {@link ChessPiece} que pode se mover uma casa em qualquer dire√ß√£o
+ * (horizontal, vertical ou diagonal). No jogo de xadrez, cada jogador tem um Rei
+ * e o objetivo final √© dar xeque-mate ao Rei advers√°rio.
  */
 public class King extends ChessPiece {
 
-	/**
-	 * Dependendcia para CHESSMATCH
-	 */
-	private ChessMatch chessMatch;
+    /**
+     * Variavel
+     * Depend√™ncia para a partida de xadrez atual.
+     * <p>
+     * Esta vari√°vel mant√©m uma refer√™ncia √† inst√¢ncia da classe {@link ChessMatch}
+     * √† qual esta pe√ßa est√° associada. Atrav√©s desta refer√™ncia, a pe√ßa pode
+     * interagir com o estado geral do jogo, como verificar regras espec√≠ficas
+     * ou acessar informa√ß√µes sobre outros elementos da partida.
+     */
+    private ChessMatch chessMatch;
 
-	/**
-	 * Construtor
-	 * 
-	 * Busca construtor da Super Class
-	 * 
-	 * e adiciona dependencia
-	 */
-	public King(Board board, Color color,ChessMatch chessMatch) {
-		super(board, color);
-		this.chessMatch = chessMatch;
-	}
+    /// Construtor
+    /// inicializa um novo Rei com o tabuleiro
+    /// em que ele est√° localizado, a sua cor e a partida de xadrez associada.
+    ///
+    /// Chama o construtor da superclasse [ChessPiece] para associar o Rei
+    /// ao tabuleiro e definir a sua cor. Adicionalmente, estabelece uma depend√™ncia
+    /// com a inst√¢ncia da partida de xadrez atual ([ChessMatch]).
+    ///
+    /// @param board      O tabuleiro de xadrez onde o Rei ser√° colocado.
+    /// @param color      A cor do Rei ([branco][#WHITE] ou [preto][#BLACK]).
+    /// @param chessMatch A inst√¢ncia da partida de xadrez atual √† qual o Rei pertence.
+    public King(Board board, Color color, ChessMatch chessMatch) {
+        super(board, color);
+        this.chessMatch = chessMatch;
+    }
 
-	/**
-	 * Metodo To String
-	 * 
-	 * Busca super class (Override)
-	 */
-	@Override
-	public String toString() {
-		return "K";
-	}
+    /**
+     * Metodo To String
+     *
+     * @return Uma string "K" representando o Rei.
+     */
+    @Override
+    public String toString() {
+        return "K";
+    }
 
-	/**
-	 * Metodo Can Move
-	 * 
-	 * Cria nova variavel p do tipo ChessPiece
-	 * 
-	 * retorna True quando p for nulo (casa vazia) OU QUANDO a quando a cor √©
-	 * diferente da cor da CLASS
-	 */
-	private boolean canMove(Position position) {
-		ChessPiece p = (ChessPiece) getBoard().piece(position);
-		return p == null || p.getColor() != getColor();
-	}
+    /**
+     * Metodo CanMove
+     * Verifica se o Rei pode se mover para uma determinada posi√ß√£o.
+     * <p>
+     * O Rei pode se mover para uma casa se ela estiver vazia ou contiver uma
+     * pe√ßa advers√°ria.
+     *
+     * @param position A posi√ß√£o de destino a ser verificada.
+     * @return `true` se o Rei puder se mover para a posi√ß√£o; `false` caso contr√°rio
+     * (se a casa estiver ocupada por uma pe√ßa da mesma cor).
+     */
+    private boolean canMove(Position position) {
+        ChessPiece p = (ChessPiece) getBoard().piece(position);
+        return p == null || p.getColor() != getColor();
+    }
 
-	/**
-	 * Metodo test Rook Castling
-	 * 
-	 * Movimentos Especiais - Castling
-	 * 
-	 * Testa se existe uma torre para a jogada especial(roque\Castling)
-	 * 
-	 * retorna true quando a existir peÁam for da mesma cor e ainda nao tiver klk
-	 * movimento
-	 * 
-	 */
-	private boolean testRookCastling(Position position) {
-		ChessPiece p = (ChessPiece) getBoard().piece(position);
-		return p != null && p instanceof Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
-	}
+    /**
+     * Metodo testRookCastling
+     * Verifica se uma torre est√° em uma posi√ß√£o v√°lida para o roque.
+     * <p>
+     * Para o roque ser poss√≠vel, deve haver uma torre na posi√ß√£o especificada,
+     * da mesma cor do Rei, e que ainda n√£o tenha realizado nenhum movimento.
+     *
+     * @param position A posi√ß√£o da poss√≠vel torre para o roque.
+     * @return `true` se a torre estiver apta para o roque; `false` caso contr√°rio.
+     */
+    private boolean testRookCastling(Position position) {
+        ChessPiece p = (ChessPiece) getBoard().piece(position);
+        return p != null && p instanceof Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
+    }
 
-	/**
-	 * Metodo Possible Moves
-	 * 
-	 * Cria matriz de boolean(false) com o tamanho do tabuleiro
-	 * 
-	 */
-	public boolean[][] possibleMoves() {
-		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+    /*** Retorna uma matriz booleana indicando os movimentos poss√≠veis do Rei
+     * na sua posi√ß√£o atual.
+     * <p>
+     * Este m√©todo sobrescreve o m√©todo {@link ChessPiece#possibleMoves()} da
+     * superclasse. O Rei pode se mover uma casa em qualquer dire√ß√£o (horizontal,
+     * vertical ou diagonal). Al√©m disso, verifica a possibilidade de roque (castling)
+     * com as torres, tanto para o lado do rei quanto para o lado da rainha,
+     * desde que as condi√ß√µes para o roque sejam atendidas.
+     *
+     * @return Uma matriz booleana com as mesmas dimens√µes do tabuleiro, onde
+     * `true` indica que a casa correspondente √© um movimento poss√≠vel para o Rei,
+     * e `false` caso contr√°rio.
+     */
+    @Override
+    public boolean[][] possibleMoves() {
+        boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+        Position p = new Position(0, 0);
 
-		Position p = new Position(0, 0);
-		/**
-		 * Above
-		 * 
-		 * Seta valores para a posis„o p(row -1) porque a peÁa vai andar para
-		 * cima(Above) Se existir posis„o no tabuleiro e se existir peÁa na posis„o
-		 * Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() - 1, position.getColumn());// -1) porque a peÁa vai andar para cima(above)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // Above
+        p.setValues(position.getRow() - 1, position.getColumn());
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * Below
-		 * 
-		 * Seta valores para a posis„o p(row +1) porque a peÁa vai andar para
-		 * baixo(below) Se existir posis„o no tabuleiro e se existir peÁa na posis„o
-		 * Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() + 1, position.getColumn());// +1) porque a peÁa vai andar para baixo(Below)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // Below
+        p.setValues(position.getRow() + 1, position.getColumn());
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * Left
-		 * 
-		 * Seta valores para a posis„o p(columnn -1) porque a peÁa vai andar para
-		 * esquerda(left) Se existir posis„o no tabuleiro e se existir peÁa na posis„o
-		 * Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow(), position.getColumn() - 1);// -1) porque a peÁa vai andar para esquerda(left)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // Left
+        p.setValues(position.getRow(), position.getColumn() - 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * Rigth
-		 * 
-		 * Seta valores para a posis„o p(columnn +1) porque a peÁa vai andar para
-		 * direita(Rigth) Se existir posis„o no tabuleiro e se existir peÁa na posis„o
-		 * Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow(), position.getColumn() + 1);// +1) porque a peÁa vai andar para direita(Rigth)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // Right
+        p.setValues(position.getRow(), position.getColumn() + 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * NW cima esquerda
-		 * 
-		 * Seta valores para a posis„o p(row -1)(columnn -1) porque a peÁa vai andar
-		 * para Nord-Este(cima esquerd)(NW) Se existir posis„o no tabuleiro e se existir
-		 * peÁa na posis„o Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() - 1, position.getColumn() - 1);// -1)-1) porque a peÁa vai andar para
-																		// Nord-Este(cima
-																		// esquerd)(NW)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // NW cima esquerda
+        p.setValues(position.getRow() - 1, position.getColumn() - 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * NE cima Direita
-		 * 
-		 * Seta valores para a posis„o p(row -1)(columnn +1) porque a peÁa vai andar
-		 * para Nord-oeste(cima direita)(NE) Se existir posis„o no tabuleiro e se
-		 * existir peÁa na posis„o Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() - 1, position.getColumn() + 1);// -1)+1) porque a peÁa vai andar para
-																		// Nord-Este(cima
-																		// esquerd)(NE)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // NE cima Direita
+        p.setValues(position.getRow() - 1, position.getColumn() + 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * SW Baixo esquerda
-		 * 
-		 * Seta valores para a posis„o p(row +1)(columnn -1) porque a peÁa vai andar
-		 * para sud-Este(baixo esquerda)(SW) Se existir posis„o no tabuleiro e se
-		 * existir peÁa na posis„o Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() + 1, position.getColumn() - 1);// +1)-1) porque a peÁa vai andar para
-																		// sud-Este(baixo esquerda)(SW)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // SW Baixo esquerda
+        p.setValues(position.getRow() + 1, position.getColumn() - 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * SE baixo Direita
-		 * 
-		 * Seta valores para a posis„o p(row +1)(columnn +1) porque a peÁa vai andar
-		 * para sud-oeste(baixo direita)(SE) Se existir posis„o no tabuleiro e se
-		 * existir peÁa na posis„o Retorna valor na matriz como True
-		 */
-		p.setValues(position.getRow() + 1, position.getColumn() + 1);// +1)+1) porque a peÁa vai andar para
-																		// sud-oeste(baixo direita)(SE)
-		if (getBoard().positionExists(p) && canMove(p)) {
-			mat[p.getRow()][p.getColumn()] = true;
-		}
+        // SE baixo Direita
+        p.setValues(position.getRow() + 1, position.getColumn() + 1);
+        if (getBoard().positionExists(p) && canMove(p)) {
+            mat[p.getRow()][p.getColumn()] = true;
+        }
 
-		/**
-		 * Movimento especial Castling
-		 * 
-		 */
+        // Special move Castling
+        if (getMoveCount() == 0 && !chessMatch.getCheck()) {
+            // special move castling kingside rook
+            Position posT1 = new Position(position.getRow(), position.getColumn() + 3);
+            if (testRookCastling(posT1)) {
+                Position p1 = new Position(position.getRow(), position.getColumn() + 1);
+                Position p2 = new Position(position.getRow(), position.getColumn() + 2);
+                if (getBoard().piece(p1) == null && getBoard().piece(p2) == null) {
+                    mat[position.getRow()][position.getColumn() + 2] = true;
+                }
+            }
+            // special move castling queenside rook
+            Position posT2 = new Position(position.getRow(), position.getColumn() - 4);
+            if (testRookCastling(posT2)) {
+                Position p1 = new Position(position.getRow(), position.getColumn() - 1);
+                Position p2 = new Position(position.getRow(), position.getColumn() - 2);
+                Position p3 = new Position(position.getRow(), position.getColumn() - 3);
+                if (getBoard().piece(p1) == null && getBoard().piece(p2) == null && getBoard().piece(p3) == null) {
+                    mat[position.getRow()][position.getColumn() - 2] = true;
+                }
+            }
+        }
 
-		if (getMoveCount() == 0 && !chessMatch.getcheck()) {
-			// special move castling kingside rook
-			Position posT1 = new Position(position.getRow(), position.getColumn() + 3);
-			if (testRookCastling(posT1)) {
-				Position p1 = new Position(position.getRow(), position.getColumn() + 1);
-				Position p2 = new Position(position.getRow(), position.getColumn() + 2);
-				if (getBoard().piece(p1) == null && getBoard().piece(p2) == null) {
-					mat[position.getRow()][position.getColumn() + 2] = true;
-				}
-			}
-			// special move castling queenside rook
-			Position posT2 = new Position(position.getRow(), position.getColumn() - 4);
-			if (testRookCastling(posT2)) {
-				Position p1 = new Position(position.getRow(), position.getColumn() - 1);
-				Position p2 = new Position(position.getRow(), position.getColumn() - 2);
-				Position p3 = new Position(position.getRow(), position.getColumn() - 3);
-				if (getBoard().piece(p1) == null && getBoard().piece(p2) == null && getBoard().piece(p3) == null) {
-					mat[position.getRow()][position.getColumn() - 2] = true;
-				}
-			}
-		}
-
-		return mat;
-	}
+        return mat;
+    }
 }

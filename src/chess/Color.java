@@ -1,13 +1,15 @@
-
+/**
+ * @author Daniel Gil
+ */
 package chess;
 
 /**
- * Class ENUM color
+ * Enumeração
  *
+ * Variareis
+ * Black, White representa as cores das peças no jogo de xadrez.
  */
 public enum Color {
-	/**
-	 * Parametros ENUM
-	 */
-	Black, White;
+
+    Black, White;
 }

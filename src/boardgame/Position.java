@@ -7,26 +7,29 @@ package boardgame;
  * Class Position
  */
 public class Position {
-    /**
-     * variaveis - row, column
+
+    /*
+     * Variareis
+     * row, column
      */
     private int row;
     private int column;
 
     /**
      * Construtor
+     * inicializa uma nova posição no tabuleiro com a linha e a coluna especificadas.
      *
-     * @param row
-     * @param column
+     * @param row    A linha da posição.
+     * @param column A coluna da posição.
      */
     public Position(int row, int column) {
         this.row = row;
         this.column = column;
     }
 
-    /**
-     * Getter Setters
-     */
+
+    // Getter Setters
+
     public int getRow() {
         return row;
     }
@@ -44,10 +47,11 @@ public class Position {
     }
 
     /**
-     * Metodo Set values
+     * Method setValues
+     * Define os valores da linha e da coluna desta posição.
      *
-     * @param row
-     * @param column
+     * @param row    O novo valor para a linha da posição.
+     * @param column O novo valor para a coluna da posição.
      */
     public void setValues(int row, int column) {
         this.row = row;

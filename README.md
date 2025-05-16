@@ -1,4 +1,4 @@
-![Plataforma Java MYSQL](https://img.shields.io/badge/Platforms-Java%2C%20MYSQL%20Workbench-blue)  
+![Plataforma Java MYSQL](https://img.shields.io/badge/Platforms-Java%2C/20Color%20Console-blue)  
 
 ![Status](https://img.shields.io/badge/status-estável-brightgreen)
 

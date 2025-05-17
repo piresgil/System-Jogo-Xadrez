@@ -263,7 +263,7 @@ You can't put yourself in check
 - Queen 
 
 ## Class Queen 
-	- Update ChessMatch.InitialSetup 
+- Update ChessMatch.InitialSetup 
 
 #### OOP Topics: 
 - Encapsulation 

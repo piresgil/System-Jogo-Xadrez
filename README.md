@@ -270,7 +270,7 @@ You can't put yourself in check
 - Inheritance 
 - Polymorphism 
 
-### Special move - Castling 
+## Special move - Castling 
 
 ![MainAOO](src/Sreenshots/SpecialMoveCastling.png)
 
@@ -279,7 +279,7 @@ You can't put yourself in check
 - Update ChessMatch.MakeMove 
 - Update ChessMatch.UndoMove 
 
-### Special move - En Passant 
+## Special move - En Passant 
 
 ![MainAOO](src/Sreenshots/SpecialMoveEnPassant.png)
 
@@ -292,7 +292,7 @@ You can't put yourself in check
 - Update ChessMatch.UndoMove 
 - Update ChessMatch.InitialSetup 
 
-### Special move - Promotion 
+## Special move - Promotion 
 
 ![MainAOO](src/Sreenshots/SpecialMovePromotion.png)
 

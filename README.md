@@ -18,148 +18,100 @@ Sistema de jogo de xadrez player vs player, sem UI, modo terminal colorido, most
 ## Position 
 Class Position [public] 
 
-## OOP Topics: 
-Encapsulation
- 
-Constructors 
+### OOP Topics: 
+- Encapsulation
+- Constructors 
+- ToString (Object / overriding) 
+- Starting to implement Board and Piece 
 
-ToString (Object / overriding) 
-
-Starting to implement Board and Piece 
-
-
-### Checklist: 
+#### Checklist: 
 Classes Piece, Board [public] 
 
-## OOP Topics: 
-Associations 
-
-Encapsulation / Access Modifiers 
-
-Data Structures Topics: 
-
-Matrix 
-
-Chess layer and printing the board 
-
+### OOP Topics: 
+- Associations 
+- Encapsulation / Access Modifiers 
+- Data Structures Topics: 
+- Matrix 
+- Chess layer and printing the board 
 
 ![MainAOO](src/Sreenshots/layout.png)
 
-### Checklist: 
-Methods: Board.Piece(row, column) and Board.Piece(position) 
+#### Checklist: 
+- Methods: Board.Piece(row, column) and Board.Piece(position) 
+- Enum Chess.Color 
+- Class Chess.ChessPiece [public] 
+- Class Chess.ChessMatch [public] 
+- Class ChessConsole.UI 
 
-Enum Chess.Color 
+### OOP Topics: 
+- Enumerations 
+- Encapsulation / Access Modifiers 
+- Inheritance 
+- Downcasting 
+- Static members 
+- Layers pattern 
+- Data Structures Topics: 
+- Matrix 
+- Placing pieces on the board 
 
-Class Chess.ChessPiece [public] 
+#### Checklist: 
+- Method: Board.PlacePiece(piece, position) 
+- Classes: Rook, King [public] 
+- Method: ChessMatch.InitialSetup 
 
-Class Chess.ChessMatch [public] 
+### OOP Topics: 
+- Inheritance 
+- Overriding 
+- Polymorphism (ToString) 
+- BoardException and defensive programming 
 
-Class ChessConsole.UI 
+#### Checklist: 
+- Class BoardException [public] 
+- Methods: Board.PositionExists, Board.ThereIsAPiece 
+- Implement defensive programming in Board methods  
 
-## OOP Topics: 
-Enumerations 
+### OOP Topics: 
+- Exceptions 
+- Constructors (a string must be informed to the exception) 
+- ChessException and ChessPosition 
 
-Encapsulation / Access Modifiers 
+#### Checklist: 
+- Class ChessException [public] 
+- Class ChessPosition [public] 
+- Refactor ChessMatch.InitialSetup 
 
-Inheritance 
+### OOP Topics: 
+- Exceptions 
+- Encapsulation 
+- Constructors (a string must be informed to the exception) 
+- Overriding 
+- Static members 
+- Layers pattern 
+- Little improvement in board printing 
 
-Downcasting 
+### Color in terminal: 
+- Windows: Git Bash 
+- Mac: Google "osx terminal color" 
 
-Static members 
+#### Checklist: 
+- Place more pieces on the board 
+- Distinguish piece colors in UI.PrintPiece method 
+- Moving pieces 
 
-Layers pattern 
+#### Checklist: 
+- Method Board.RemovePiece 
+- Method UI.ReadChessPosition 
+- Method ChessMatch.PerformChessMove 
+- Method ChessMatch.MakeMove 
+- Method ChessMatch.ValidadeSourcePosition 
+- Write basic logic on Program.cs 
 
-Data Structures Topics: 
+### OOP Topics: 
+- Exceptions 
+- Encapsulation 
+- Handling exceptions and clearing screen 
 
-Matrix 
-
-Placing pieces on the board 
-
-### Checklist: 
-Method: Board.PlacePiece(piece, position) 
-
-Classes: Rook, King [public] 
-
-Method: ChessMatch.InitialSetup 
-
-## OOP Topics: 
-Inheritance 
-
-Overriding 
-
-Polymorphism (ToString) 
-
-BoardException and defensive programming 
-
-### Checklist: 
-Class BoardException [public] 
-
-Methods: Board.PositionExists, Board.ThereIsAPiece 
-
-Implement defensive programming in Board methods  
-
-## OOP Topics: 
-Exceptions 
-
-Constructors (a string must be informed to the exception) 
-
-ChessException and ChessPosition 
-
-### Checklist: 
-Class ChessException [public] 
-
-Class ChessPosition [public] 
-
-Refactor ChessMatch.InitialSetup 
-
-## OOP Topics: 
-Exceptions 
-
-Encapsulation 
-
-Constructors (a string must be informed to the exception) 
-
-Overriding 
-
-Static members 
-
-Layers pattern 
-
-Little improvement in board printing 
-
-## Color in terminal: 
-Windows: Git Bash 
-
-Mac: Google "osx terminal color" 
-
-### Checklist: 
-Place more pieces on the board 
-
-Distinguish piece colors in UI.PrintPiece method 
-
-Moving pieces 
-
-### Checklist: 
-Method Board.RemovePiece 
-
-Method UI.ReadChessPosition 
-
-Method ChessMatch.PerformChessMove 
-
-Method ChessMatch.MakeMove 
-
-Method ChessMatch.ValidadeSourcePosition 
-
-Write basic logic on Program.cs 
-
-## OOP Topics: 
-Exceptions 
-
-Encapsulation 
-
-Handling exceptions and clearing screen 
-
-## Clear screen using Java: 
+### Clear screen using Java: 
 // https://stackoverflow.com/questions/2979383/java-clear-the-console 
 
 public static void clearScreen() {   
@@ -169,275 +121,192 @@ System.out.print("\033[H\033[2J");
 System.out.flush();   
 }   
 
-### Checklist: 
-ChessException 
+#### Checklist: 
+- ChessException 
+- InputMismatchException 
 
-InputMismatchException 
-
-## Possible moves of a piece 
+### Possible moves of a piece 
 
 ![MainAOO](src/Sreenshots/PossibleMovesOfPiece.png)
 
-### Checklist: 
-Methods in Piece: 
+#### Checklist: 
+- Methods in Piece: 
+- OossibleMoves [abstract] 
+- PossibleMove 
+- IsThereAnyPossibleMove 
+- Basic PossibleMove implementation for Rook and King 
+- Update ChessMatch.ValidadeSourcePosition 
 
-OossibleMoves [abstract] 
+### OOP Topics: 
+- Abstract method / class 
+- Exceptions 
+- Implementing possible moves of Rook 
 
-PossibleMove 
+#### Checklist: 
+- Method ChessPiece.IsThereOpponentPiece(position) [protected] 
+- Implement Rook.PossibleMoves 
+- Method ChessMatch.ValidateTargetPosition 
 
-IsThereAnyPossibleMove 
+### OOP Topics: 
+- Polymorphism 
+- Encapsulation / access modifiers [protected] 
+- Exceptions 
+- Printing possible moves 
 
-Basic PossibleMove implementation for Rook and King 
+#### Checklist: 
+- Method ChessMatch.PossibleMoves 
+- Method UI.PrintBoard [overload] 
+- Refactor main program logic 
 
-Update ChessMatch.ValidadeSourcePosition 
+### OOP Topics: 
+- Overloading 
+- Implementing possible moves of King 
 
-## OOP Topics: 
-Abstract method / class 
+#### Checklist: 
+- Method King.CanMove(position) [private] 
+- Implement King.PossibleMoves 
 
-Exceptions 
+### OOP Topics: 
+- Encapsulation 
+- Polymorphism 
+- Switching player each turn 
 
-Implementing possible moves of Rook 
-
-### Checklist: 
-Method ChessPiece.IsThereOpponentPiece(position) [protected] 
-
-Implement Rook.PossibleMoves 
-
-Method ChessMatch.ValidateTargetPosition 
-
-## OOP Topics: 
-Polymorphism 
-
-Encapsulation / access modifiers [protected] 
-
-Exceptions 
-
-Printing possible moves 
-
-### Checklist: 
-Method ChessMatch.PossibleMoves 
-
-Method UI.PrintBoard [overload] 
-
-Refactor main program logic 
-
-## OOP Topics: 
-Overloading 
-
-Implementing possible moves of King 
-
-### Checklist: 
-Method King.CanMove(position) [private] 
-
-Implement King.PossibleMoves 
-
-## OOP Topics: 
-Encapsulation 
-
-Polymorphism 
-
-Switching player each turn 
-
-### Checklist: 
+#### Checklist: 
 Class ChessMatch: 
+	- Properties Turn, CurrentPlayer [private set] 
+	- Method NextTurn [private] 
+	- Update PerformChessMove 
+	- Update ValidadeSourcePosition 
+	- Method UI.PrintMatch 
 
-Properties Turn, CurrentPlayer [private set] 
+### OOP Topics: 
+- Encapsulation 
+- Exceptions 
+- Handling captured pieces 
 
-Method NextTurn [private] 
+#### Checklist: 
+- Method UI.PrintCapturedPieces 
+- Update UI.PrintMatch 
+- Update Program logic 
+- Lists in ChessMatch: _piecesOnTheBoard, _capturedPieces 
+- Update constructor 
+- Update PlaceNewPiece 
+- Update MakeMove 
 
-Update PerformChessMove 
+### OOP Topics: 
+- Encapsulation 
+- Constructors 
+- Data Structures Topics: 
+- List 
+- Check logic 
 
-Update ValidadeSourcePosition 
-
-Method UI.PrintMatch 
-
-## OOP Topics: 
-Encapsulation 
-
-Exceptions 
-
-Handling captured pieces 
-
-### Checklist: 
-Method UI.PrintCapturedPieces 
-
-Update UI.PrintMatch 
-
-Update Program logic 
-
-Lists in ChessMatch: _piecesOnTheBoard, _capturedPieces 
-
-Update constructor 
-
-Update PlaceNewPiece 
-
-Update MakeMove 
-
-## OOP Topics: 
-Encapsulation 
-
-Constructors 
-
-Data Structures Topics: 
-
-List 
-
-Check logic 
-
-## Rules: 
+### Rules: 
 Check means your king is under threat by at least one opponent piece 
 
 You can't put yourself in check 
 
-### Checklist: 
-Property ChessPiece.ChessPosition [get] 
+#### Checklist: 
+- Property ChessPiece.ChessPosition [get] 
+- Class ChessMatch: 
+- Method UndoMove 
+- Property Check [private set] 
+- Method Opponent [private] 
+- Method King(color) [private] 
+- Method TestCheck 
+- Update PerformChessMove 
+- Update UI.PrintMatch 
+- Checkmate logic 
 
+#### Checklist: 
 Class ChessMatch: 
+	- Property Checkmate [private set] 
+	- Method TestCheckmate [private] 
+	- Update PerformChessMove 
+	- Update UI.PrintMatch 
+	- Update Program logic 
+	- Piece move count 
 
-Method UndoMove 
-
-Property Check [private set] 
-
-Method Opponent [private] 
-
-Method King(color) [private] 
-
-Method TestCheck 
-
-Update PerformChessMove 
-
-Update UI.PrintMatch 
-
-Checkmate logic 
-
-### Checklist: 
-Class ChessMatch: 
-
-Property Checkmate [private set] 
-
-Method TestCheckmate [private] 
-
-Update PerformChessMove 
-
-Update UI.PrintMatch 
-
-Update Program logic 
-
-Piece move count 
-
-### Checklist: 
+#### Checklist: 
 Class ChessPiece: 
-
-Property MoveCount [private set] 
-
-Method IncreaseMoveCount [internal] 
-
-Method DecreaseMoveCount [internal] 
+	- Property MoveCount [private set] 
+	- Method IncreaseMoveCount [internal] 
+	- Method DecreaseMoveCount [internal] 
 
 Class ChessMatch: 
+	- Update MakeMove 
+	- Update UndoMove 
 
-Update MakeMove 
+### OOP Topics: 
+- Encapsulation 
+- Pawn 
 
-Update UndoMove 
-
-## OOP Topics: 
-Encapsulation 
-
-Pawn 
-
-### Checklist: 
+#### Checklist: 
 Class Pawn 
+	- Update ChessMatch.InitialSetup 
 
-Update ChessMatch.InitialSetup 
+### OOP Topics: 
+- Encapsulation 
+- Inheritance 
+- Polymorphism 
+- Bishop 
 
-## OOP Topics: 
-Encapsulation 
-
-Inheritance 
-
-Polymorphism 
-
-Bishop 
-
-### Checklist: 
+#### Checklist: 
 Class Bishop 
+	- Update ChessMatch.InitialSetup 
 
-Update ChessMatch.InitialSetup 
+### OOP Topics: 
+- Encapsulation 
+- Inheritance 
+- Polymorphism 
+- Knight 
 
-## OOP Topics: 
-Encapsulation 
-
-Inheritance 
-
-Polymorphism 
-
-Knight 
-
-### Checklist: 
+#### Checklist: 
 Class Knight 
+	- Update ChessMatch.InitialSetup 
 
-Update ChessMatch.InitialSetup 
+### OOP Topics: 
+- Encapsulation 
+- Inheritance 
+- Polymorphism 
+- Queen 
 
-## OOP Topics: 
-Encapsulation 
-
-Inheritance 
-
-Polymorphism 
-
-Queen 
-
-### Checklist: 
+#### Checklist: 
 Class Queen 
+	- Update ChessMatch.InitialSetup 
 
-Update ChessMatch.InitialSetup 
+### OOP Topics: 
+- Encapsulation 
+- Inheritance 
+- Polymorphism 
 
-## OOP Topics: 
-Encapsulation 
-
-Inheritance 
-
-Polymorphism 
-
-## Special move - Castling 
+### Special move - Castling 
 
 ![MainAOO](src/Sreenshots/SpecialMoveCastling.png)
 
-### Checklist: 
-Update King 
+#### Checklist: 
+- Update King 
+- Update ChessMatch.MakeMove 
+- Update ChessMatch.UndoMove 
 
-Update ChessMatch.MakeMove 
-
-Update ChessMatch.UndoMove 
-
-## Special move - En Passant 
+### Special move - En Passant 
 
 ![MainAOO](src/Sreenshots/SpecialMoveEnPassant.png)
 
 ### Checklist: 
-Register a pawn which can be captured by en passant on next turn 
+- Register a pawn which can be captured by en passant on next turn 
+- Property ChessMatch.EnPassantVulnerable 
+- Update ChessMatch.PerformChessMove 
+- Update Pawn.PossibleMoves 
+- Update ChessMatch.MakeMove 
+- Update ChessMatch.UndoMove 
+- Update ChessMatch.InitialSetup 
 
-Property ChessMatch.EnPassantVulnerable 
-
-Update ChessMatch.PerformChessMove 
-
-Update Pawn.PossibleMoves 
-
-Update ChessMatch.MakeMove 
-
-Update ChessMatch.UndoMove 
-
-Update ChessMatch.InitialSetup 
-
-## Special move - Promotion 
+### Special move - Promotion 
 
 ![MainAOO](src/Sreenshots/SpecialMovePromotion.png)
 
-### Checklist: 
-Property ChessMatch.Promoted 
-
-Update ChessMatch.PerformChessMove 
-
-Method ChessMatch.ReplacePromotedPiece 
-
-Update Program logic
+#### Checklist: 
+- Property ChessMatch.Promoted 
+- Update ChessMatch.PerformChessMove 
+- Method ChessMatch.ReplacePromotedPiece 
+- Update Program logic

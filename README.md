@@ -11,9 +11,8 @@ Sistema de jogo de xadrez player vs player, sem UI, modo terminal colorido, most
 ### Sreenshots:
 <p align="center">
   <img src="src/Sreenshots/chess-system.png" alt="MainAOO" />
+  <img src="src/Sreenshots/chess-system2.png" alt="MainAOO" />
 </p>
-
-![MainAOO](src/Sreenshots/chess-system2.png)
 
 ### UML:
 ![MainAOO](src/Sreenshots/chess-system-design.png)

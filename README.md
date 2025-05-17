@@ -127,7 +127,9 @@ System.out.flush();
 
 ### Possible moves of a piece 
 
-![MainAOO](src/Sreenshots/PossibleMovesOfPiece.png)
+<p align="center">
+  <img src="src/Sreenshots/PossibleMovesOfPiece.png" alt="MainAOO" />
+</p>
 
 #### Checklist: 
 - Methods in Piece: 

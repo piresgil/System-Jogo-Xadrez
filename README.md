@@ -27,7 +27,7 @@ Class Position [public]
 #### Checklist: 
 Classes Piece, Board [public] 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Associations 
 - Encapsulation / Access Modifiers 
 - Data Structures Topics: 
@@ -43,7 +43,7 @@ Classes Piece, Board [public]
 - Class Chess.ChessMatch [public] 
 - Class ChessConsole.UI 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Enumerations 
 - Encapsulation / Access Modifiers 
 - Inheritance 
@@ -59,7 +59,7 @@ Classes Piece, Board [public]
 - Classes: Rook, King [public] 
 - Method: ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Inheritance 
 - Overriding 
 - Polymorphism (ToString) 
@@ -70,7 +70,7 @@ Classes Piece, Board [public]
 - Methods: Board.PositionExists, Board.ThereIsAPiece 
 - Implement defensive programming in Board methods  
 
-### OOP Topics: 
+#### OOP Topics: 
 - Exceptions 
 - Constructors (a string must be informed to the exception) 
 - ChessException and ChessPosition 
@@ -80,7 +80,7 @@ Classes Piece, Board [public]
 - Class ChessPosition [public] 
 - Refactor ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Exceptions 
 - Encapsulation 
 - Constructors (a string must be informed to the exception) 
@@ -106,7 +106,7 @@ Classes Piece, Board [public]
 - Method ChessMatch.ValidadeSourcePosition 
 - Write basic logic on Program.cs 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Exceptions 
 - Encapsulation 
 - Handling exceptions and clearing screen 
@@ -115,9 +115,7 @@ Classes Piece, Board [public]
 // https://stackoverflow.com/questions/2979383/java-clear-the-console 
 
 public static void clearScreen() {   
-
 System.out.print("\033[H\033[2J");   
-
 System.out.flush();   
 }   
 
@@ -137,7 +135,7 @@ System.out.flush();
 - Basic PossibleMove implementation for Rook and King 
 - Update ChessMatch.ValidadeSourcePosition 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Abstract method / class 
 - Exceptions 
 - Implementing possible moves of Rook 
@@ -147,7 +145,7 @@ System.out.flush();
 - Implement Rook.PossibleMoves 
 - Method ChessMatch.ValidateTargetPosition 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Polymorphism 
 - Encapsulation / access modifiers [protected] 
 - Exceptions 
@@ -158,7 +156,7 @@ System.out.flush();
 - Method UI.PrintBoard [overload] 
 - Refactor main program logic 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Overloading 
 - Implementing possible moves of King 
 
@@ -166,20 +164,19 @@ System.out.flush();
 - Method King.CanMove(position) [private] 
 - Implement King.PossibleMoves 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Polymorphism 
 - Switching player each turn 
 
-#### Checklist: 
-Class ChessMatch: 
-	- Properties Turn, CurrentPlayer [private set] 
-	- Method NextTurn [private] 
-	- Update PerformChessMove 
-	- Update ValidadeSourcePosition 
-	- Method UI.PrintMatch 
+## Class ChessMatch: 
+- Properties Turn, CurrentPlayer [private set] 
+- Method NextTurn [private] 
+- Update PerformChessMove 
+- Update ValidadeSourcePosition 
+- Method UI.PrintMatch 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Exceptions 
 - Handling captured pieces 
@@ -193,7 +190,7 @@ Class ChessMatch:
 - Update PlaceNewPiece 
 - Update MakeMove 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Constructors 
 - Data Structures Topics: 
@@ -217,64 +214,58 @@ You can't put yourself in check
 - Update UI.PrintMatch 
 - Checkmate logic 
 
-#### Checklist: 
-Class ChessMatch: 
-	- Property Checkmate [private set] 
-	- Method TestCheckmate [private] 
-	- Update PerformChessMove 
-	- Update UI.PrintMatch 
-	- Update Program logic 
-	- Piece move count 
+## Class ChessMatch: 
+- Property Checkmate [private set] 
+- Method TestCheckmate [private] 
+- Update PerformChessMove 
+- Update UI.PrintMatch 
+- Update Program logic 
+- Piece move count 
 
-#### Checklist: 
-Class ChessPiece: 
-	- Property MoveCount [private set] 
-	- Method IncreaseMoveCount [internal] 
-	- Method DecreaseMoveCount [internal] 
+## Class ChessPiece: 
+- Property MoveCount [private set] 
+- Method IncreaseMoveCount [internal] 
+- Method DecreaseMoveCount [internal] 
 
-Class ChessMatch: 
-	- Update MakeMove 
-	- Update UndoMove 
+## Class ChessMatch: 
+- Update MakeMove 
+- Update UndoMove 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Pawn 
 
-#### Checklist: 
-Class Pawn 
-	- Update ChessMatch.InitialSetup 
+## Class Pawn 
+- Update ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Inheritance 
 - Polymorphism 
 - Bishop 
 
-#### Checklist: 
-Class Bishop 
-	- Update ChessMatch.InitialSetup 
+## Class Bishop 
+- Update ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Inheritance 
 - Polymorphism 
 - Knight 
 
-#### Checklist: 
-Class Knight 
-	- Update ChessMatch.InitialSetup 
+## Class Knight 
+- Update ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Inheritance 
 - Polymorphism 
 - Queen 
 
-#### Checklist: 
-Class Queen 
+## Class Queen 
 	- Update ChessMatch.InitialSetup 
 
-### OOP Topics: 
+#### OOP Topics: 
 - Encapsulation 
 - Inheritance 
 - Polymorphism 
@@ -292,7 +283,7 @@ Class Queen
 
 ![MainAOO](src/Sreenshots/SpecialMoveEnPassant.png)
 
-### Checklist: 
+#### Checklist: 
 - Register a pawn which can be captured by en passant on next turn 
 - Property ChessMatch.EnPassantVulnerable 
 - Update ChessMatch.PerformChessMove 

@@ -8,18 +8,12 @@
 
 Sistema de jogo de xadrez player vs player, sem UI, modo terminal colorido, mostra movimentos possíveis, peças movem-se através de coordenadas ( a2(Pawn White), d3(Queen White), H7(Pawn black), f8(Knight black))
 
-## Exemplos:
-
+### Sreenshots:
 ![MainAOO](src/Sreenshots/chess-system.png)
-
 ![MainAOO](src/Sreenshots/chess-system2.png)
 
-## UML:
-
+### UML:
 ![MainAOO](src/Sreenshots/chess-system-design.png)
-
-
-
 
 ## Position 
 Class Position [public] 

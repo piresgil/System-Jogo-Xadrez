@@ -34,7 +34,8 @@ Classes Piece, Board [public]
 - Encapsulation / Access Modifiers 
 - Data Structures Topics: 
 - Matrix 
-- Chess layer and printing the board  ![MainAOO](src/Sreenshots/layout.png)
+- Chess layer and printing the board
+![MainAOO](src/Sreenshots/layout.png)
 
 #### Checklist: 
 - Methods: Board.Piece(row, column) and Board.Piece(position) 

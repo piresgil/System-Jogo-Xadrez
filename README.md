@@ -35,6 +35,7 @@ Classes Piece, Board [public]
 - Data Structures Topics: 
 - Matrix 
 - Chess layer and printing the board
+
 ![MainAOO](src/Sreenshots/layout.png)
 
 #### Checklist: 
